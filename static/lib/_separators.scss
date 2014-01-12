@@ -1,0 +1,119 @@
+svg.bigTriangle {
+    pointer-events: none;
+    display: block;
+    height: 6em;
+
+    @include responsive(tablet){
+        height: 5em;
+    }
+
+    @include responsive(phone){
+        height: 3em;
+    }
+
+    path{
+        stroke-width: 2;
+    }
+
+    &.white-to-gray{
+        background-color: $milk;
+
+        path{
+            fill: $background;
+            stroke: $background;
+        }
+    }
+
+    &.white-to-green{
+        background-color: $green-dark;
+
+        path{
+            fill: $background;
+            stroke: $background;
+        }
+    }
+
+    &.green-to-dark-gray{
+        background-color: $gray-darker;
+
+        path{
+            fill: $green-dark;
+            stroke: $green-dark;
+        }
+    }
+
+    &.white-to-light-gray{
+        background-color: lighten($milk, 2%);
+
+        path{
+            fill: $background;
+            stroke: $background;
+        }
+    }
+
+    &.gray-to-white{
+        background-color: transparent;
+
+        path{
+            fill: $milk;
+            stroke: $milk;
+        }
+    }
+
+    &.white-to-nothing{
+        background-color: transparent;
+
+        path{
+            fill: $background;
+            stroke: $background;
+        }
+    }
+
+    &.gray-to-nothing{
+        background-color: transparent;
+
+        path{
+            fill: $milk;
+            stroke: $milk;
+        }
+    }
+
+    &.nothing-to-white{
+        polygon{
+            fill: $background;
+        }
+    }
+
+    &.light-gray-to-nothing{
+        background-color: transparent;
+
+        path{
+            fill: lighten($milk, 2%);
+            stroke: lighten($milk, 2%);
+        }
+    }
+}
+/* F3F2EF */
+
+.dots{
+    position: relative;
+}
+
+.dots::before,
+.dots::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.dots::before {
+    bottom: 20px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background: $gray-light;
+    box-shadow: 30px 0 $gray-light, -30px 0 $gray-light;
+}

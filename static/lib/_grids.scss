@@ -1,0 +1,48 @@
+/*------------------------------------*\
+    $GRIDS
+\*------------------------------------*/
+
+/* -- Setup grids with base class -- */     
+@include grids-init("col");
+
+/* -- Breakpoint 3 (.bp3)
+------------------------------------------------------------- */            
+@media only screen and (max-width: $desktop-bp) {
+
+    @include grid-setup("desktop-col");
+
+    .hide-on-desktop{
+        display: none !important;
+    }
+    
+}
+
+/* -- Breakpoint 2 (.bp2)
+------------------------------------------------------------- */            
+@media only screen and (max-width: $tablet-bp) {
+
+    @include grid-setup("tablet-col");
+
+    .hide-on-tablet{
+        display: none !important;
+    }
+
+    .show-on-tablet{
+        display: block !important;
+    }
+
+}
+
+/* -- Breakpoint (.bp1)
+------------------------------------------------------------- */            
+@media only screen and (max-width: $phone-bp) {
+ 
+    @include grid-setup("phone-col");
+
+    .hide-on-phone{
+        display: none !important;
+    }
+
+}
+   
+

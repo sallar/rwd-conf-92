@@ -1,0 +1,162 @@
+//-------------------------------------------------------
+// GRID SETTINGS
+//-------------------------------------------------------
+
+// this is the fixed gutter between columns
+$grid-gutter: 2em;
+
+// this sets your class names
+$grid-wrap-class: "grid-wrap";
+$grid-col-class: "grid-col";
+
+//-------------------------------------------------------
+// GRID MIXINS
+//-------------------------------------------------------
+@mixin set-gutter($gutter) {
+
+  margin-right: -$gutter;
+
+  .#{$grid-col-class} {
+    padding-right: $gutter; }
+
+}
+
+@mixin grid-config {
+
+  .#{$grid-wrap-class} {    
+    margin-right: -$grid-gutter; // the same as your gutter
+    overflow: hidden;
+    clear: both; }
+	   
+  .#{$grid-col-class} {
+    float: right;
+    padding-right: $grid-gutter; // the gutter between columns
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+  .large-gutter {
+    @include set-gutter($grid-gutter*2); }
+
+  .half-gutter {
+    @include set-gutter($grid-gutter/2); }
+
+  .no-gutter {
+    @include set-gutter(0); }
+
+  .reset-gutter {
+    @include set-gutter($grid-gutter); }
+
+  // reset for list grids
+  ul.#{$grid-wrap-class},
+  ol.#{$grid-wrap-class} {
+    padding-right: 0;
+    list-style: none;}
+
+  li.#{$grid-col-class} {
+    margin-right: 0;
+    margin-bottom: 0; }
+
+}	
+
+// set the proportions you want to use
+// $namespace relates to the class prefix e.g. bp2-col to target breakpoint 2
+@mixin grid-setup($namespace) {
+
+  .#{$namespace}-full,
+  .#{$namespace}-set-full .#{$grid-col-class} {
+    width: 100%; }
+  .#{$namespace}-one-half,
+  .#{$namespace}-set-one-half .#{$grid-col-class} {
+    width: 50%; }
+  .#{$namespace}-one-third,
+  .#{$namespace}-set-one-third .#{$grid-col-class} {
+    width: 33.333%; }
+  .#{$namespace}-one-quarter,
+  .#{$namespace}-set-one-quarter .#{$grid-col-class} {
+    width: 25%; }
+  .#{$namespace}-one-fifth,
+  .#{$namespace}-set-one-fifth .#{$grid-col-class} {
+    width: 20%; }
+  .#{$namespace}-two-thirds {
+    width: 66.666%; }
+  .#{$namespace}-three-quarters {
+    width: 75%; }
+
+}
+
+// account for no border-box in IE7/6
+@mixin grid-config-oldie {
+
+  .lt-ie8 {
+    .#{$grid-wrap-class} {
+      margin-right: 0; }
+
+    .#{$grid-col-class} {
+      padding: 0;
+      margin-right: 5%;
+
+    &:first-child {
+      margin-right: 0; }		
+    }
+
+  }
+	
+}
+
+// amend widths slightly for IE7/6
+@mixin grid-setup-oldie($namespace) {
+
+  .lt-ie8 {
+    .#{$namespace}-full,
+    .#{$namespace}-set-full .#{$grid-col-class} {
+      width: 99.95%; }
+    .#{$namespace}-one-half,
+    .#{$namespace}-set-one-half .#{$grid-col-class} {
+      width: 47.45%; }
+    .#{$namespace}-one-third,
+    .#{$namespace}-set-one-third .#{$grid-col-class} {
+      width: 29.55%; }
+    .#{$namespace}-two-thirds {
+      width: 64.95%; }
+    .#{$namespace}-one-quarter,
+    .#{$namespace}-set-one-quarter .#{$grid-col-class} {
+      width: 19.95%; }
+    .#{$namespace}-three-quarters {
+      width: 74.95%; }
+  }
+	
+}
+
+//-------------------------------------------------------
+// ADDED SUPPORT
+// Mixins to work with http://goo.gl/uwyT6
+//-------------------------------------------------------
+$old-ie: null !default;
+ 
+// include grids-init to set up your grids with your base class
+// i.e. @include grids-init("col");
+@mixin grids-init($class) {
+	
+  @include grid-config;
+  @include grid-setup($class);
+
+  @if $old-ie {
+    @include grid-config-oldie;	
+    @include grid-setup-oldie($class);
+  }
+	
+}
+
+// include grids-include with your class for each breakpoint
+// e.g. @include respond-min(30em) { @include grid-include("bp1-col"); } 
+@mixin grid-include($class) {
+	
+  @include grid-setup($class);
+
+  @if $old-ie {
+    @include grid-setup-oldie($class);
+  }
+
+}
