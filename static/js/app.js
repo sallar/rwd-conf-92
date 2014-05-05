@@ -5,7 +5,7 @@
     | | | |__   |__   |   --|     |  |  |  |  |  |__ _|  |  |    -|  |  |
     |_____|_____|_____|_____|__|__|_____|_____|_____|_|_____|__|__|_____|
 
-    (C) 2013 - Sallar Kaboli <sallar.kaboli@gmail.com>
+    (C) 2014 - Sallar Kaboli <sallar.kaboli@gmail.com>
     Web Standards School <wsschool.org>.
 
     This program is free software; you can redistribute it and/or modify
@@ -36,16 +36,26 @@ var ie = (function(){
         all[0]
     );
 
-    return v > 4 ? v : undef;
+    return v > 4 ? v : false;
 
 }());
 
+var touch = (function(){
+  return 'ontouchstart' in window // works on most browsers 
+      || 'onmsgesturechange' in window; // works on ie10
+}());
+
 /**
- * Add IE Class
+ * Add Helper Classes
  */
 if( ie && ie < 9 ) {
     $('body').addClass('ie');
 }
+
+if( touch ) {
+    $('body').addClass('touch');
+}
+
 
 /**
  * Add Map

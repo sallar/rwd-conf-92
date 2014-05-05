@@ -5,7 +5,7 @@
     | | | |__   |__   |   --|     |  |  |  |  |  |__ _|  |  |    -|  |  |
     |_____|_____|_____|_____|__|__|_____|_____|_____|_|_____|__|__|_____|
 
-    (C) 2013 - Sallar Kaboli <sallar.kaboli@gmail.com>
+    (C) 2014 - Sallar Kaboli <sallar.kaboli@gmail.com>
     Web Standards School <wsschool.org>.
 
     This program is free software; you can redistribute it and/or modify
@@ -90,7 +90,7 @@ $phone-bp: 35em;
 /*------------------------------------*\
     Includes
 \*------------------------------------*/
-@import "bourbon";
+@import "vendor/bourbon/bourbon";
 @import "vendor/normalize";
 @import "vendor/font-awesome/font-awesome";
 
@@ -153,6 +153,16 @@ body{
                 line-height: 1.8;
                 margin: 0;
             }
+        }
+    }
+
+    &.touch{
+        .masthead{
+            min-height: 100vh;
+            position: relative;
+        }
+        .main-wrapper{
+            top: 0;
         }
     }
 }
